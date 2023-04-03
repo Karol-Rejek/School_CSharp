@@ -25,9 +25,9 @@ namespace TestApp
 
     public partial class FormTest : Form
     {
-
+        Dictionary<Questions, Func<List<Answers>, int>> goodAnswers2Dictionary = new Dictionary<Questions, Func<List<Answers>, int>>();
         Dictionary<Questions, List<Answers>> goodAnswersDictionary = new Dictionary<Questions, List<Answers>>();
-        Dictionary<Questions, List<string>> goodTextAnswersDictionary = new Dictionary<Questions, List<string>>();
+        Dictionary<Questions, Func<string, int>> goodTextAnswersDictionary = new Dictionary<Questions, Func<string, int>>();
         Dictionary<Questions, Dictionary<Answers, CheckBox>> answersCheckBoxDictionary = new Dictionary<Questions, Dictionary<Answers, CheckBox>>();
         Dictionary<Questions, Dictionary<Answers, RadioButton>> answersRadioButtonDictionary = new Dictionary<Questions, Dictionary<Answers, RadioButton>>();
         Dictionary<Questions, TextBox> answersTextQuestionsDictionary = new Dictionary<Questions, TextBox>();
@@ -38,7 +38,7 @@ namespace TestApp
             //dictionary
             List<Answers> answers = new List<Answers>();
             answers.Add(Answers.D);
-            goodAnswersDictionary.Add(Questions.Question1,answers);
+            goodAnswersDictionary.Add(Questions.Question1, answers);
             answers = new List<Answers>();
             answers.Add(Answers.B);
             goodAnswersDictionary.Add(Questions.Question2, answers);
@@ -47,9 +47,9 @@ namespace TestApp
             answers.Add(Answers.C);
             goodAnswersDictionary.Add(Questions.Question3, answers);
 
-            List<string> answersTextList = new List<string>();
-            answersTextList.Add("ZIEMIA");
-            goodTextAnswersDictionary.Add(Questions.Question4, answersTextList);
+            //goodAnswers2Dictionary.Add(Questions.Question1, (List<Answers> answers) => )
+
+            goodTextAnswersDictionary.Add(Questions.Question4, (string answer) => answer.Trim().ToUpper() == "ZIEMIA" ? 1 : -1);
 
             Dictionary<Answers, CheckBox> answersCheckBox_Q1 = new Dictionary<Answers, CheckBox>();
             answersCheckBox_Q1.Add(Answers.A, checkBoxQuestion3A);
@@ -85,7 +85,7 @@ namespace TestApp
         private int CheckAnswers()
         {
             int wynik = 0;
-            
+
             wynik += CheckRadioButtonAnswers();
             wynik += CheckCheckBoxAnswers();
             wynik += CheckTextBoxAnswers();
@@ -130,7 +130,7 @@ namespace TestApp
                 {
                     if (!answers.Value.Checked)
                         continue;
-                    if (listOfGoodAnswers.Contains(answers.Key) )
+                    if (listOfGoodAnswers.Contains(answers.Key))
                     {
                         wynik++;
                     }
@@ -141,7 +141,7 @@ namespace TestApp
                 }
             }
 
-            return wynik; 
+            return wynik;
         }
 
         private int CheckTextBoxAnswers()
@@ -149,17 +149,10 @@ namespace TestApp
             int wynik = 0;
             foreach (KeyValuePair<Questions, TextBox> playerAnswer in answersTextQuestionsDictionary)
             {
-                List<string> listOfGoodAnswers = goodTextAnswersDictionary[playerAnswer.Key];
-                if (listOfGoodAnswers.Contains(playerAnswer.Value.Text.Trim().ToUpper()))
-                {
-                    wynik++;
-                }
-                else
-                {
-                    wynik--;
-                }
+                wynik = goodTextAnswersDictionary[playerAnswer.Key](playerAnswer.Value.Text);
             }
             return wynik;
         }
+
     }
 }

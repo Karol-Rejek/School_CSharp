@@ -291,9 +291,9 @@ namespace TestApp
             this.labelQuestion4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelQuestion4.Location = new System.Drawing.Point(6, 19);
             this.labelQuestion4.Name = "labelQuestion4";
-            this.labelQuestion4.Size = new System.Drawing.Size(410, 60);
+            this.labelQuestion4.Size = new System.Drawing.Size(414, 60);
             this.labelQuestion4.TabIndex = 0;
-            this.labelQuestion4.Text = "Jak nazywa się trzecia planeta \r\nod Słońca w naszym układzie słonecznym?";
+            this.labelQuestion4.Text = "Jak nazywa się trzecia planeta \r\nod Słońca w naszym Układzie Słonecznym?";
             // 
             // FormTest
             // 
