@@ -18,58 +18,42 @@ namespace TestApp
         Question1, Question2, Question3, Question4
     }
 
-    enum Answers
-    {
-        A, B, C, D
-    }
-
     public partial class FormTest : Form
     {
-        Dictionary<Questions, Func<List<Answers>, int>> goodAnswers2Dictionary = new Dictionary<Questions, Func<List<Answers>, int>>();
-        Dictionary<Questions, List<Answers>> goodAnswersDictionary = new Dictionary<Questions, List<Answers>>();
-        Dictionary<Questions, Func<string, int>> goodTextAnswersDictionary = new Dictionary<Questions, Func<string, int>>();
-        Dictionary<Questions, Dictionary<Answers, CheckBox>> answersCheckBoxDictionary = new Dictionary<Questions, Dictionary<Answers, CheckBox>>();
-        Dictionary<Questions, Dictionary<Answers, RadioButton>> answersRadioButtonDictionary = new Dictionary<Questions, Dictionary<Answers, RadioButton>>();
-        Dictionary<Questions, TextBox> answersTextQuestionsDictionary = new Dictionary<Questions, TextBox>();
+        Dictionary<Questions, Func<string, int>> goodAnswersDictionary = new();
+        Dictionary<Questions, List<CheckBox>> answersCheckBoxDictionary = new();
+        Dictionary<Questions, List<RadioButton>> answersRadioButtonDictionary = new();
+        Dictionary<Questions, TextBox> answersTextQuestionsDictionary = new();
         public FormTest()
         {
             InitializeComponent();
 
             //dictionary
-            List<Answers> answers = new List<Answers>();
-            answers.Add(Answers.D);
-            goodAnswersDictionary.Add(Questions.Question1, answers);
-            answers = new List<Answers>();
-            answers.Add(Answers.B);
-            goodAnswersDictionary.Add(Questions.Question2, answers);
-            answers = new List<Answers>();
-            answers.Add(Answers.B);
-            answers.Add(Answers.C);
-            goodAnswersDictionary.Add(Questions.Question3, answers);
 
-            //goodAnswers2Dictionary.Add(Questions.Question1, (List<Answers> answers) => )
+            goodAnswersDictionary.Add(Questions.Question1, (string answer) => answer == "4" ? 1 : -1);
+            goodAnswersDictionary.Add(Questions.Question2, (string answer) => answer.ToUpper() == "KOTA" ? 1 : -1);
+            goodAnswersDictionary.Add(Questions.Question3, (string answer) => answer == "2" || answer == "86" ? 1 : -1);
+            goodAnswersDictionary.Add(Questions.Question4, (string answer) => answer.Trim().ToUpper() == "ZIEMIA" ? 1 : -1);
 
-            goodTextAnswersDictionary.Add(Questions.Question4, (string answer) => answer.Trim().ToUpper() == "ZIEMIA" ? 1 : -1);
-
-            Dictionary<Answers, CheckBox> answersCheckBox_Q1 = new Dictionary<Answers, CheckBox>();
-            answersCheckBox_Q1.Add(Answers.A, checkBoxQuestion3A);
-            answersCheckBox_Q1.Add(Answers.B, checkBoxQuestion3B);
-            answersCheckBox_Q1.Add(Answers.C, checkBoxQuestion3C);
-            answersCheckBox_Q1.Add(Answers.D, checkBoxQuestion3D);
+            List<CheckBox> answersCheckBox_Q1 = new();
+            answersCheckBox_Q1.Add(checkBoxQuestion3A);
+            answersCheckBox_Q1.Add(checkBoxQuestion3B);
+            answersCheckBox_Q1.Add(checkBoxQuestion3C);
+            answersCheckBox_Q1.Add(checkBoxQuestion3D);
 
             answersCheckBoxDictionary.Add(Questions.Question3, answersCheckBox_Q1);
 
-            Dictionary<Answers, RadioButton> answersRadioButton_Q1 = new Dictionary<Answers, RadioButton>();
-            answersRadioButton_Q1.Add(Answers.A, radioButtonQuestion1A);
-            answersRadioButton_Q1.Add(Answers.B, radioButtonQuestion1B);
-            answersRadioButton_Q1.Add(Answers.C, radioButtonQuestion1C);
-            answersRadioButton_Q1.Add(Answers.D, radioButtonQuestion1D);
+            List<RadioButton> answersRadioButton_Q1 = new();
+            answersRadioButton_Q1.Add(radioButtonQuestion1A);
+            answersRadioButton_Q1.Add(radioButtonQuestion1B);
+            answersRadioButton_Q1.Add(radioButtonQuestion1C);
+            answersRadioButton_Q1.Add(radioButtonQuestion1D);
 
-            Dictionary<Answers, RadioButton> answersRadioButton_Q2 = new Dictionary<Answers, RadioButton>();
-            answersRadioButton_Q2.Add(Answers.A, radioButtonQuestion2A);
-            answersRadioButton_Q2.Add(Answers.B, radioButtonQuestion2B);
-            answersRadioButton_Q2.Add(Answers.C, radioButtonQuestion2C);
-            answersRadioButton_Q2.Add(Answers.D, radioButtonQuestion2D);
+            List<RadioButton> answersRadioButton_Q2 = new();
+            answersRadioButton_Q2.Add(radioButtonQuestion2A);
+            answersRadioButton_Q2.Add(radioButtonQuestion2B);
+            answersRadioButton_Q2.Add(radioButtonQuestion2C);
+            answersRadioButton_Q2.Add(radioButtonQuestion2D);
 
             answersRadioButtonDictionary.Add(Questions.Question1, answersRadioButton_Q1);
             answersRadioButtonDictionary.Add(Questions.Question2, answersRadioButton_Q2);
@@ -97,22 +81,15 @@ namespace TestApp
         {
             int wynik = 0;
 
-            foreach (KeyValuePair<Questions, Dictionary<Answers, RadioButton>> questionAnswers in answersRadioButtonDictionary)
+            foreach (KeyValuePair<Questions,  List<RadioButton>> questionAnswers in answersRadioButtonDictionary)
             {
-                List<Answers> listOfGoodAnswers = goodAnswersDictionary[questionAnswers.Key];
-                foreach (KeyValuePair<Answers, RadioButton> answers in questionAnswers.Value)
+                foreach (RadioButton answers in questionAnswers.Value)
                 {
-                    if (!answers.Value.Checked)
+                    if (!answers.Checked)
                         continue;
-                    if (listOfGoodAnswers.Contains(answers.Key))
-                    {
-                        wynik++;
-                        break;
-                    }
-                    else
-                    {
-                        wynik--;
-                    }
+
+                    wynik += goodAnswersDictionary[questionAnswers.Key](answers.Text);
+                    break;
                 }
             }
 
@@ -123,21 +100,14 @@ namespace TestApp
         {
             int wynik = 0;
 
-            foreach (KeyValuePair<Questions, Dictionary<Answers, CheckBox>> questionAnswers in answersCheckBoxDictionary)
+            foreach (KeyValuePair<Questions, List<CheckBox>> questionAnswers in answersCheckBoxDictionary)
             {
-                List<Answers> listOfGoodAnswers = goodAnswersDictionary[questionAnswers.Key];
-                foreach (KeyValuePair<Answers, CheckBox> answers in questionAnswers.Value)
+                foreach ( CheckBox answers in questionAnswers.Value)
                 {
-                    if (!answers.Value.Checked)
+                    if (!answers.Checked)
                         continue;
-                    if (listOfGoodAnswers.Contains(answers.Key))
-                    {
-                        wynik++;
-                    }
-                    else
-                    {
-                        wynik--;
-                    }
+
+                    wynik += goodAnswersDictionary[questionAnswers.Key](answers.Text);
                 }
             }
 
@@ -149,7 +119,7 @@ namespace TestApp
             int wynik = 0;
             foreach (KeyValuePair<Questions, TextBox> playerAnswer in answersTextQuestionsDictionary)
             {
-                wynik = goodTextAnswersDictionary[playerAnswer.Key](playerAnswer.Value.Text);
+                wynik = goodAnswersDictionary[playerAnswer.Key](playerAnswer.Value.Text);
             }
             return wynik;
         }
