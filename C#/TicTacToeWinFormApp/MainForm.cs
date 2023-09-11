@@ -19,10 +19,16 @@ namespace TicTacToeWinFormApp
 
     public partial class MainForm : Form
     {
+        //-------------------------
+        // Properties
+
         string[] players = new string[2];
         int currentPlayerNumber;
 
         Button[,] buttonBoard = new Button[3, 3];
+
+        //-------------------------
+        // Functions
 
         public MainForm()
         {

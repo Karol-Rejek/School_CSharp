@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pierwszy projekt", "Pierwszy projekt\Pierwszy projekt.csproj", "{27D92294-2B71-45D7-BD18-3D738D59A583}"
 EndProject
@@ -33,7 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeWinFormApp", "TicT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{2AC2B64E-2060-4473-BEE4-404FFDDDF87B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClockWinFormsApp", "ClockWinFormsApp\ClockWinFormsApp.csproj", "{25F7B507-CEA5-42B9-BCD9-599C98638D47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClockWinFormsApp", "ClockWinFormsApp\ClockWinFormsApp.csproj", "{25F7B507-CEA5-42B9-BCD9-599C98638D47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{C7C3CC88-44D0-4B73-AE68-F2ACAFA0AB17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstWpfApp", "FirstWpfApp\FirstWpfApp.csproj", "{4C7FA7F3-9369-4465-97AD-67ED9AA10FC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,10 @@ Global
 		{25F7B507-CEA5-42B9-BCD9-599C98638D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25F7B507-CEA5-42B9-BCD9-599C98638D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25F7B507-CEA5-42B9-BCD9-599C98638D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C7FA7F3-9369-4465-97AD-67ED9AA10FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C7FA7F3-9369-4465-97AD-67ED9AA10FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C7FA7F3-9369-4465-97AD-67ED9AA10FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C7FA7F3-9369-4465-97AD-67ED9AA10FC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +124,7 @@ Global
 		{0831C7C4-BC7B-489F-8E3A-F4B996F60CE8} = {6DBC0CAA-343D-4DB3-BD74-1D3C7E1FDEBB}
 		{2AC2B64E-2060-4473-BEE4-404FFDDDF87B} = {6DBC0CAA-343D-4DB3-BD74-1D3C7E1FDEBB}
 		{25F7B507-CEA5-42B9-BCD9-599C98638D47} = {6DBC0CAA-343D-4DB3-BD74-1D3C7E1FDEBB}
+		{4C7FA7F3-9369-4465-97AD-67ED9AA10FC5} = {C7C3CC88-44D0-4B73-AE68-F2ACAFA0AB17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84F08BD6-5A7E-457E-BB97-0994CB37C669}
