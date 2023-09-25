@@ -47,7 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContainersApp", "Containers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Bindowanie", "03 Bindowanie", "{2185E9A0-5E23-4A2B-8549-3893E16760C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindowanieWpfApp", "BindowanieWpfApp\BindowanieWpfApp.csproj", "{2C52A17A-9D60-46A1-A287-520C60896C2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BindowanieWpfApp", "BindowanieWpfApp\BindowanieWpfApp.csproj", "{2C52A17A-9D60-46A1-A287-520C60896C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComboBoxWpfApp", "ComboBoxWpfApp\ComboBoxWpfApp.csproj", "{92F2A4DB-1F53-4183-9882-19654691FEDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{2C52A17A-9D60-46A1-A287-520C60896C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C52A17A-9D60-46A1-A287-520C60896C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C52A17A-9D60-46A1-A287-520C60896C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92F2A4DB-1F53-4183-9882-19654691FEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F2A4DB-1F53-4183-9882-19654691FEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92F2A4DB-1F53-4183-9882-19654691FEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92F2A4DB-1F53-4183-9882-19654691FEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{B0A80D2D-8052-49F4-9CBA-9217982D3100} = {34E1D40A-77B9-4FD8-8989-15F01F870BA0}
 		{2185E9A0-5E23-4A2B-8549-3893E16760C2} = {C7C3CC88-44D0-4B73-AE68-F2ACAFA0AB17}
 		{2C52A17A-9D60-46A1-A287-520C60896C2C} = {2185E9A0-5E23-4A2B-8549-3893E16760C2}
+		{92F2A4DB-1F53-4183-9882-19654691FEDD} = {2185E9A0-5E23-4A2B-8549-3893E16760C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84F08BD6-5A7E-457E-BB97-0994CB37C669}
