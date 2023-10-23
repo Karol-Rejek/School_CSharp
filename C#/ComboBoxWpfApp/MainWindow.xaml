@@ -1,0 +1,55 @@
+﻿<Window x:Class="ComboBoxWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ComboBoxWpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600"
+        Name="mainWindow">
+    <StackPanel>
+        <TextBlock Text="Pierwszy Combobox" FontSize="20" FontWeight="Bold"/>
+        <ComboBox>
+            <ComboBoxItem>Pozycja Pierwsza</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">Druga Pierwsza</ComboBoxItem>
+            <ComboBoxItem>Trzecia Pierwsza</ComboBoxItem>
+        </ComboBox>
+        
+        <TextBlock Text="Zaawansowany Combobox" FontSize="20" FontWeight="Bold"/>
+        <ComboBox>
+            <ComboBoxItem IsSelected="True">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="16" Height="16" Fill="Green" Margin="10"/>
+                    <TextBlock Text="Zielony" Foreground="Green"  Margin="10"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="16" Height="16" Fill="Orange" Margin="10"/>
+                    <TextBlock Text="Pomaranczowy" Foreground="Orange"  Margin="10"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="16" Height="16" Fill="Blue" Margin="10"/>
+                    <TextBlock Text="niebieski" Foreground="Blue"  Margin="10"/>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+        <TextBlock Text="Bindowanie Combobox" FontSize="20" FontWeight="Bold"/>
+        <ComboBox ItemsSource="{Binding ElementName=mainWindow, Path=ItemsList}"/>
+        <TextBox Text="{Binding ElementName=mainWindow, Path=OptionToList}"/>
+        <Button Content="Dodaj nowy elemeny" Click="Button_Click"/>
+        <TextBlock Text="Zaawansowane bindowanie" FontSize="20" FontWeight="Bold"/>
+        <ComboBox ItemsSource="{Binding ElementName=mainWindow, Path=OwnColorsColection}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="16" Height="16" Fill="{Binding NameOfColor_Eng}" Margin="10"/>
+                        <TextBlock Text="{Binding Path=NameOfColor_Pol}" Foreground="{Binding NameOfColor_Eng}"  Margin="10"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </StackPanel>
+</Window>

@@ -1,0 +1,37 @@
+﻿<Window x:Class="BindowanieWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BindowanieWpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="586" Width="400"
+        Name="mainWindow">
+    <StackPanel>
+        <TextBlock Text="Wartosc wprowadzona"/>
+        <TextBlock FontSize="35" Name="textBlockWynik"/>
+        <TextBox Margin="20 5" Name="userValueTextBox"
+                 TextChanged="userValueTextBox_TextChanged"/>
+        <Button Content="Przepisz" Margin="20" HorizontalAlignment="Center"
+                Click="Button_Click"/>
+        <TextBlock Text="Wersja z bindowaniem" FontSize="20" FontWeight="Bold"/>
+        <TextBlock Text="Wartosc wprowadzona"/>
+        <TextBlock FontSize="35"
+                   Text="{Binding ElementName=textBoxSuorce,Path=Text}"/>
+        <TextBox Margin="20 5" Name="textBoxSuorce"/>
+
+        <TextBlock Text="Odswierzanie tytulu strony" FontSize="25"/>
+        <TextBox Text="{Binding ElementName=mainWindow,Path=Title,UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Komunikata z pola:" FontSize="20" FontWeight="Bold"/>
+        <TextBox Text="{Binding ElementName=mainWindow, Path=SourceValue}"/>
+        <Button Content="Pokaż komunikat"
+                HorizontalAlignment="Center"
+                Click="Button_Click_1"/>
+
+        <TextBlock Text="Dzien tygodnia" FontSize="30" FontWeight="Bold"/>
+        <TextBlock Text="{Binding ElementName=mainWindow, Path=NameDayOfWeek}"/>
+        <TextBox Text="{Binding ElementName=mainWindow, Path=StringNumberOfWeek}"/>
+        <Button Content="Pokaz dzien tygodnia" Click="ButtonShowDayOfWeek_Click"/>
+    </StackPanel>
+</Window>
