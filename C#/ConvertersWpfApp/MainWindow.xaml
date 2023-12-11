@@ -1,0 +1,61 @@
+﻿<Window x:Class="ConvertersWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConvertersWpfApp"
+        xmlns:converters="clr-namespace:ConvertersWpfApp.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Name="mainWindow">
+    <Window.Resources>
+        <converters:ColorComponentToColorSaturationPercentageConverter x:Key="ColorComponentToColorSaturationPercentageConverter"/>
+        <converters:DoublesToColorConverter x:Key="DoublesToColorConverter"/>
+    </Window.Resources>
+    <StackPanel>
+        <WrapPanel>
+            <TextBlock Text="Red:" FontSize="20" FontWeight="Bold" Width="100"/>
+            <Slider Width="200" 
+                    Minimum="0" Maximum="255" Value="{Binding ElementName=mainWindow, Path=RedComponent}"
+                    TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            <TextBlock Text="{Binding ElementName=mainWindow, Path=RedComponent,
+                              StringFormat=Wartość koloru {0} }"/>
+            <TextBlock Margin="8 0 0 0" Text="{Binding ElementName=mainWindow, Path=RedComponent,
+                              StringFormat=Procent nasycenia: {0:N2} % ,
+                              Converter={StaticResource ColorComponentToColorSaturationPercentageConverter}}"/>
+        </WrapPanel>
+        <WrapPanel>
+            <TextBlock Text="Green:" FontSize="20" FontWeight="Bold" Width="100"/>
+            <Slider Width="200" 
+                    Minimum="0" Maximum="255" Value="{Binding ElementName=mainWindow, Path=GreenComponent}"
+                    TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            <TextBlock Text="{Binding ElementName=mainWindow, Path=GreenComponent,
+                              StringFormat=Wartość koloru {0} }"/>
+            <TextBlock Margin="8 0 0 0" Text="{Binding ElementName=mainWindow, Path=GreenComponent,
+                  StringFormat=Procent nasycenia: {0:N2} % ,
+                  Converter={StaticResource ColorComponentToColorSaturationPercentageConverter}}"/>
+        </WrapPanel>
+        <WrapPanel>
+            <TextBlock Text="Blue:" FontSize="20" FontWeight="Bold" Width="100"/>
+            <Slider Width="200" 
+                    Minimum="0" Maximum="255" Value="{Binding ElementName=mainWindow, Path=BlueComponent}"
+                    TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            <TextBlock Text="{Binding ElementName=mainWindow, Path=BlueComponent, 
+                              StringFormat=Wartość koloru {0} }"/>
+            <TextBlock Margin="8 0 0 0" Text="{Binding ElementName=mainWindow, Path=BlueComponent,
+                  StringFormat=Procent nasycenia: {0:N2} % ,
+                  Converter={StaticResource ColorComponentToColorSaturationPercentageConverter}}"/>
+        </WrapPanel>
+        <Button Content="Ustaw kolor czerwony" Click="Button_Click" Margin="20"/>
+        <Rectangle Width="100" Height="100">
+            <Rectangle.Fill>
+                <MultiBinding Converter="{StaticResource DoublesToColorConverter}">
+                    <Binding ElementName="mainWindow" Path="RedComponent" Mode="OneWay"/>
+                    <Binding ElementName="mainWindow" Path="GreenComponent" Mode="OneWay"/>
+                    <Binding ElementName="mainWindow" Path="BlueComponent" Mode="OneWay"/>
+                </MultiBinding>
+            </Rectangle.Fill>
+        </Rectangle>
+
+    </StackPanel>
+</Window>
