@@ -21,7 +21,15 @@
         </WrapPanel>
         <CheckBox Content="Lubię pizze z ananasem" Margin="0 10"
                   IsChecked="{Binding CheckResult}"/>
+        
+        <TextBlock Text="Wybierz płeć"/>
+        <RadioButton Content="Mężczyzna" IsChecked="{Binding Male}"/>
+        <RadioButton Content="Kobieta" IsChecked="{Binding Female}"/>
 
+        <TextBlock Text="Wybierz ulubione danie"/>
+        <ComboBox ItemsSource="{Binding ListOfDish}" 
+                  SelectedItem="{Binding SelectedDish}"/>
+        
         <Button Content="Pobierz dane" 
                 HorizontalAlignment="Center" Margin="10" FontSize="20"
                 Command="{Binding DownloadDataCommand}"/>

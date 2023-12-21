@@ -22,6 +22,16 @@ namespace PersonalQuestionnaireWpfApp.ViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
+
+        public string SelectedDish
+        {
+            get { return personalDataModel.selectedDish; }
+            set
+            {
+                personalDataModel.selectedDish = value;
+                OnPropertyChanged(nameof(SelectedDish));
+            }
+        } 
         
         public bool CheckResult
         {
@@ -30,6 +40,36 @@ namespace PersonalQuestionnaireWpfApp.ViewModels
             {
                 personalDataModel.bPizzaWithPineapple = value;
                 OnPropertyChanged(nameof(CheckResult));
+            }
+        }
+                
+        public bool Male
+        {
+            get { return personalDataModel.bMale; }
+            set
+            {
+                personalDataModel.bMale = value;
+                OnPropertyChanged(nameof(Male));
+            }
+        }
+
+        public bool Female
+        {
+            get { return personalDataModel.bFemale; }
+            set
+            {
+                personalDataModel.bFemale = value;
+                OnPropertyChanged(nameof(Female));
+            }
+        }
+
+        public List<string> ListOfDish
+        {
+            get { return personalDataModel.listOfDish; }
+            set
+            {
+                personalDataModel.listOfDish = value;
+                OnPropertyChanged(nameof(ListOfDish));
             }
         }
 
@@ -56,7 +96,8 @@ namespace PersonalQuestionnaireWpfApp.ViewModels
                             string result = "";
                             result += "Imię: " + Name + "\n";
                             result += "Pizza z ananasem: " + (CheckResult ? "Tak" : "Nie") + "\n";
-
+                            result += "Płeć: " + (Male ? "Mężczyzna" : "Kobieta") + "\n";
+                            result += "Ulubione danie: " + SelectedDish + "\n";
                             QuestionnaireResult = result;
                         }
                         );
