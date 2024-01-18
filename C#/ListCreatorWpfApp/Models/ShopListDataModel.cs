@@ -15,7 +15,9 @@ namespace ListCreatorWpfApp.Models
 
         public string checkText;
 
-        public string listText;
+        public string listNameText;
+
+        public string listQuantityText;
 
         public List<ListObject> shopList = new List<ListObject>();
     }

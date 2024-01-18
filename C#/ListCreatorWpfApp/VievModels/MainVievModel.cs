@@ -1,6 +1,7 @@
 ﻿using ListCreatorWpfApp.Models;
 using ListCreatorWpfApp.Objects;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,13 +45,23 @@ namespace ListCreatorWpfApp.VievModels
             }
         }
 
-        public string ListText
+        public string ListNameText
         {
-            get { return shopListData.listText; }
+            get { return shopListData.listNameText; }
             set
             {
-                shopListData.listText = value;
-                OnPropertyChanged(nameof(ListText));
+                shopListData.listNameText = value;
+                OnPropertyChanged(nameof(ListNameText));
+            }
+        }
+        
+        public string ListQuantityText
+        {
+            get { return shopListData.listQuantityText; }
+            set
+            {
+                shopListData.listQuantityText = value;
+                OnPropertyChanged(nameof(ListQuantityText));
             }
         }
 
@@ -68,7 +79,7 @@ namespace ListCreatorWpfApp.VievModels
                                 ListObject newListObject = new ListObject();
                                 newListObject.textData.name = Name;
 
-                                if (shopListData.shopList.Contains(newListObject))
+                                if (IsOnList(Name))
                                 {
                                     foreach (var item in shopListData.shopList)
                                     {
@@ -76,6 +87,7 @@ namespace ListCreatorWpfApp.VievModels
                                         {
                                             item.numericData.quantity += intQuantity;
                                             CheckText = "Pomyślnie dodane do listy";
+                                            break;
                                         }
                                     }
                                 }
@@ -85,6 +97,8 @@ namespace ListCreatorWpfApp.VievModels
                                     shopListData.shopList.Add(newListObject);
                                     CheckText = "Pomyślnie dodane do listy";
                                 }
+
+                                ShowAndUpdateListText();
                             }
                         }
                         );
@@ -106,18 +120,21 @@ namespace ListCreatorWpfApp.VievModels
                                 {
                                     if (int.TryParse(Quantity, out int intQuantity))
                                     {
-                                        if ((item.numericData.quantity - intQuantity) > 1)
+                                        if ((item.numericData.quantity - intQuantity) >= 1)
                                         {
                                             item.numericData.quantity -= intQuantity;
                                             CheckText = "Pomyślnie usunięto z listy";
+                                            ShowAndUpdateListText();
+                                            break;
                                         }
 
                                         if(item.numericData.quantity == intQuantity)
                                         {
                                             shopListData.shopList.Remove(item);
                                             CheckText = "Pomyślnie usunięto z listy";
+                                            ShowAndUpdateListText();
+                                            break;
                                         }
-
                                         CheckText = "Błąd z usunięciem z listy\n" + "Sprubój ponownie";
 
                                     }
@@ -127,6 +144,29 @@ namespace ListCreatorWpfApp.VievModels
                         );
                 return removeCommand;
             }
+        }
+
+        void ShowAndUpdateListText()
+        {
+            ListNameText = "";
+            ListQuantityText = "";
+            foreach (var item in shopListData.shopList)
+            {
+                ListNameText += item.textData.name + "\n";
+                ListQuantityText += "x" + item.numericData.quantity.ToString() + "\n";
+            }
+        }
+
+        bool IsOnList(string name)
+        {
+            foreach (var item in shopListData.shopList)
+            {
+                if (item.textData.name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

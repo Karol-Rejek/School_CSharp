@@ -13,7 +13,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <WrapPanel>
@@ -29,7 +29,7 @@
             <WrapPanel HorizontalAlignment="Center">
                 <Button Content="Dodaj" Command="{Binding AddCommand}"
                         Width="150" Height="30"/>
-                <Button Content="Usuń" 
+                <Button Content="Usuń" Command="{Binding RemoveCommand}"
                         Width="150" Height="30"/>
             </WrapPanel>
             <TextBlock Text="{Binding CheckText}" FontSize="15"/>
@@ -38,12 +38,15 @@
             <TextBlock Text="Lista Zakupów" 
                        TextAlignment="Center" Background="Cyan"
                        FontSize="20" FontStyle="Oblique"/>
-            <WrapPanel Background="Bisque">
+            <WrapPanel Background="Bisque" Width="250">
                 <TextBlock Text="Produkt" Margin="10 0"/>
-                <Label Width="200"/>
+                <Label Width="130"/>
                 <TextBlock Text="Ilość"/>
             </WrapPanel>
-            <TextBlock Text="{Binding ListText}"/>
+            <WrapPanel>
+                <TextBlock Text="{Binding ListNameText}" Margin="10 0"/>
+                <TextBlock Text="{Binding ListQuantityText}" Margin="10 0"/>
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </Window>

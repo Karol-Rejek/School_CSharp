@@ -1,0 +1,49 @@
+﻿<Window x:Class="TicTacToeWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TicTacToeWpfApp"
+        xmlns:viewModels="clr-namespace:TicTacToeWpfApp.VievModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="600">
+    <Window.DataContext>
+        <viewModels:MainVievModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Kółko i Krzyżyk" FontSize="22" HorizontalAlignment="Center"/>
+            <WrapPanel>
+                <TextBlock Text="Gracz:" FontSize="16"/>
+                <Label Width="20"/>
+                <ComboBox ItemsSource="{Binding PlayerList}"
+                          SelectedItem="{Binding SelectedPlayer}"/>
+            </WrapPanel>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="{Binding BoardText}" FontSize="40" Command="{Binding SetPleyerCommand}"/>
+            <Button Content="X" FontSize="40" Grid.Column="1"/>
+            <Button Content="X" FontSize="40" Grid.Column="2"/>
+            <Button Content="X" FontSize="40" Grid.Row="1"/>
+            <Button Content="X" FontSize="40" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="X" FontSize="40" Grid.Column="2" Grid.Row="1"/>
+            <Button Content="X" FontSize="40" Grid.Row="2"/>
+            <Button Content="X" FontSize="40" Grid.Column="1" Grid.Row="2"/>
+            <Button Content="X" FontSize="40" Grid.Column="2" Grid.Row="2"/>
+        </Grid>
+    </Grid>
+</Window>
