@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicTacToeWpfApp.Objects;
 
 namespace TicTacToeWpfApp.Models
 {
@@ -17,29 +19,44 @@ namespace TicTacToeWpfApp.Models
     {
         int gameBoardLenght;
 
-        public string selectedPlayer;
+        public string currentPlayer;
 
-        public List<string> boardText;
+        public ObservableCollection<BoardCell> boardCellCollection;
+        public ObservableCollection<string> boardCells;
 
         public List<string> playerList;
 
-        public Dictionary<int,string> GameBoard;
+        public string[,] board { get; set; } = new string[3, 3];
 
         public TicTacToeDataModel()
         {
-            selectedPlayer = string.Empty;
+            currentPlayer = string.Empty;
             gameBoardLenght = 9;
 
             playerList = new List<string>() { "X", "O" };
 
-            boardText = new List<string>();
+            boardCellCollection = new ObservableCollection<BoardCell>();
 
-            GameBoard = new Dictionary<int, string>();
-            for (int i = 1; i < gameBoardLenght; i++)
+            boardCellCollection = new()
             {
-                GameBoard.Add(i, string.Empty);
+                new() { position = new Position() { x = 0, y = 2 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 0, y = 1 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 0, y = 0 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 1, y = 2 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 1, y = 1 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 1, y = 0 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 2, y = 2 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 2, y = 1 }, settedPlayer = string.Empty },
+                new() { position = new Position() { x = 2, y = 0 }, settedPlayer = string.Empty }
+            };
+
+            boardCells = new();
+            foreach (var cell in boardCellCollection)
+            {
+                boardCells.Add(cell.settedPlayer);
             }
 
+           
         }
 
     }

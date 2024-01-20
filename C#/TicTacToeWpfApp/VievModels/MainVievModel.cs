@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TicTacToeWpfApp.Models;
+using TicTacToeWpfApp.Objects;
 using UtilsWpf;
 
 namespace TicTacToeWpfApp.VievModels
@@ -14,23 +16,33 @@ namespace TicTacToeWpfApp.VievModels
 
         TicTacToeDataModel dataModel = new();
 
-        public string SelectedPlayer
+        public string CurrentPlayer
         {
-            get { return dataModel.selectedPlayer; }
+            get { return dataModel.currentPlayer; }
             set
             {
-                dataModel.selectedPlayer = value;
-                OnPropertyChanged(nameof(SelectedPlayer));
+                dataModel.currentPlayer = value;
+                OnPropertyChanged(nameof(CurrentPlayer));
             }
         }
 
-        public List<string> BoardText
+        public string[,] Board
         {
-            get { return dataModel.boardText; }
+            get { return dataModel.board; }
             set
             {
-                dataModel.boardText = value;
-                OnPropertyChanged(nameof(BoardText));
+                dataModel.board = value;
+                OnPropertyChanged(nameof(Board));
+            }
+        }
+
+        public ObservableCollection<string> BoardCells
+        {
+            get { return dataModel.boardCells; }
+            set
+            {
+                dataModel.boardCells = value;
+                OnPropertyChanged(nameof(BoardCells));
             }
         }
 
@@ -44,7 +56,6 @@ namespace TicTacToeWpfApp.VievModels
             }
         }
 
-
         private ICommand setPleyerCommand;
         public ICommand SetPleyerCommand
         {
@@ -55,11 +66,60 @@ namespace TicTacToeWpfApp.VievModels
                         o =>
                         {
                             // find way to set button content without creating properties to each button
-                            BoardText.Add(SelectedPlayer);
+                            Tuple<int, int> position = (Tuple<int, int>)o;
+                            int row = position.Item1;
+                            int col = position.Item2;
+
+                            // Sprawdź, czy ruch jest dozwolony
+                            if (CanExecute(o))
+                            {
+                                // Aktualizuj model
+                                dataModel.board[row, col] = dataModel.currentPlayer;
+
+                                // Sprawdź zwycięstwo lub remis
+                                if (CheckForWinner() || CheckForDraw())
+                                {
+                                    // Dodaj kod obsługi zakończenia gry
+                                }
+                                else
+                                {
+                                    // Przełącz gracza
+                                    dataModel.currentPlayer = (dataModel.currentPlayer == "X") ? "O" : "X";
+                                }
+                            }
                         }
                         );
                 return setPleyerCommand;
             }
+        }
+
+        private bool CanExecute(object parameter)
+        {
+            if (parameter is Tuple<int, int> position)
+            {
+                int row = position.Item1;
+                int col = position.Item2;
+
+                // Sprawdź, czy pole jest puste (czy ruch jest dozwolony)
+                if (dataModel.board[row, col] == "\0")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool CheckForWinner()
+        {
+            // Implementacja sprawdzania zwycięstwa
+            return false;
+        }
+
+        private bool CheckForDraw()
+        {
+            // Implementacja sprawdzania remisu
+            return false;
         }
     }
 }
