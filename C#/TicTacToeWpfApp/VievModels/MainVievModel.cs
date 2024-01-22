@@ -36,15 +36,15 @@ namespace TicTacToeWpfApp.VievModels
             }
         }
 
-        public ObservableCollection<string> BoardCells
-        {
-            get { return dataModel.boardCells; }
-            set
-            {
-                dataModel.boardCells = value;
-                OnPropertyChanged(nameof(BoardCells));
-            }
-        }
+        //public ObservableCollection<string> BoardCells
+        //{
+        //    get { return dataModel.boardCells; }
+        //    set
+        //    {
+        //        dataModel.boardCells = value;
+        //        OnPropertyChanged(nameof(BoardCells));
+        //    }
+        //}
 
         public List<string> PlayerList
         {
@@ -65,25 +65,23 @@ namespace TicTacToeWpfApp.VievModels
                     setPleyerCommand = new RelayCommand<object>(
                         o =>
                         {
-                            // find way to set button content without creating properties to each button
                             Tuple<int, int> position = (Tuple<int, int>)o;
                             int row = position.Item1;
                             int col = position.Item2;
 
-                            // Sprawdź, czy ruch jest dozwolony
+                            // check move is corect
                             if (CanExecute(o))
                             {
                                 // Aktualizuj model
                                 dataModel.board[row, col] = dataModel.currentPlayer;
 
-                                // Sprawdź zwycięstwo lub remis
                                 if (CheckForWinner() || CheckForDraw())
                                 {
-                                    // Dodaj kod obsługi zakończenia gry
+                                   
                                 }
                                 else
                                 {
-                                    // Przełącz gracza
+                                    // change player
                                     dataModel.currentPlayer = (dataModel.currentPlayer == "X") ? "O" : "X";
                                 }
                             }
@@ -100,7 +98,7 @@ namespace TicTacToeWpfApp.VievModels
                 int row = position.Item1;
                 int col = position.Item2;
 
-                // Sprawdź, czy pole jest puste (czy ruch jest dozwolony)
+                //check cell is empty
                 if (dataModel.board[row, col] == "\0")
                 {
                     return true;
@@ -112,13 +110,13 @@ namespace TicTacToeWpfApp.VievModels
 
         private bool CheckForWinner()
         {
-            // Implementacja sprawdzania zwycięstwa
+            // check if win
             return false;
         }
 
         private bool CheckForDraw()
         {
-            // Implementacja sprawdzania remisu
+            // check if draw
             return false;
         }
     }

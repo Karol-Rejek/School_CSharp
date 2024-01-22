@@ -21,42 +21,43 @@ namespace TicTacToeWpfApp.Models
 
         public string currentPlayer;
 
-        public ObservableCollection<BoardCell> boardCellCollection;
-        public ObservableCollection<string> boardCells;
+        //public ObservableCollection<BoardCell> boardCellCollection;
+        //public ObservableCollection<string> boardCells;
 
         public List<string> playerList;
 
-        public string[,] board { get; set; } = new string[3, 3];
+        public string[,] board;
 
         public TicTacToeDataModel()
         {
-            currentPlayer = string.Empty;
+            currentPlayer = "X";
             gameBoardLenght = 9;
 
             playerList = new List<string>() { "X", "O" };
+            board = new string[3,3];
 
-            boardCellCollection = new ObservableCollection<BoardCell>();
+            //boardCellCollection = new ObservableCollection<BoardCell>();
 
-            boardCellCollection = new()
-            {
-                new() { position = new Position() { x = 0, y = 2 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 0, y = 1 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 0, y = 0 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 1, y = 2 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 1, y = 1 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 1, y = 0 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 2, y = 2 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 2, y = 1 }, settedPlayer = string.Empty },
-                new() { position = new Position() { x = 2, y = 0 }, settedPlayer = string.Empty }
-            };
+            //boardCellCollection = new()
+            //{
+            //    new() { position = new Position() { x = 0, y = 2 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 0, y = 1 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 0, y = 0 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 1, y = 2 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 1, y = 1 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 1, y = 0 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 2, y = 2 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 2, y = 1 }, settedPlayer = string.Empty },
+            //    new() { position = new Position() { x = 2, y = 0 }, settedPlayer = string.Empty }
+            //};
 
-            boardCells = new();
-            foreach (var cell in boardCellCollection)
-            {
-                boardCells.Add(cell.settedPlayer);
-            }
+            //boardCells = new();
+            //foreach (var cell in boardCellCollection)
+            //{
+            //    boardCells.Add(cell.settedPlayer);
+            //}
 
-           
+
         }
 
     }
