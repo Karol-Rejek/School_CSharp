@@ -26,7 +26,7 @@ namespace TicTacToeWpfApp.Models
 
         public List<string> playerList;
 
-        public string[,] board;
+        public string[][] board = { new string[3], new string[3] };
 
         public TicTacToeDataModel()
         {
@@ -34,7 +34,6 @@ namespace TicTacToeWpfApp.Models
             gameBoardLenght = 9;
 
             playerList = new List<string>() { "X", "O" };
-            board = new string[3,3];
 
             //boardCellCollection = new ObservableCollection<BoardCell>();
 

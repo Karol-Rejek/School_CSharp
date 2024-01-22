@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToeWpfApp"
         xmlns:viewModels="clr-namespace:TicTacToeWpfApp.VievModels"
+        xmlns:converters="clr-namespace:TicTacToeWpfApp.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="600">
     <Window.DataContext>
         <viewModels:MainVievModel/>
     </Window.DataContext>
     <Window.Resources>
-        
+        <converters:MultiDimensionalCoverter x:Key="MultiDimensionalCoverter"/>
         <Style x:Key="GameButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="60"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="CommandParameter" Value="{Binding}"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="FontSize" Value="40"/>
             <Setter Property="Margin" Value="2"/>
         </Style>
     </Window.Resources>
@@ -34,20 +34,27 @@
                           SelectedItem="{Binding CurrentPlayer}"/>
             </WrapPanel>
         </StackPanel>
-        <Grid Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Board}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Rows="3" Columns="3"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding}" Command="{Binding DataContext.MakeMoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" 
-                            CommandParameter="{Binding}" Style="{StaticResource GameButtonStyle}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+        <Grid Grid.Row="1" Name="myGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="{Binding Board[0][0]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="0"/>
+            <Button Content="{Binding Board[0][1]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="1"/>
+            <Button Content="{Binding Board[0][2]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="2"/>
+            <Button Content="{Binding Board[1][0]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="0"/>
+            <Button Content="{Binding Board[1][1]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="{Binding Board[1][2]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="2"/>
+            <Button Content="{Binding Board[2][0]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="0"/>
+            <Button Content="{Binding Board[2][1]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="1"/>
+            <Button Content="{Binding Board[2][2]}" Command="{Binding SetPleyerCommand}" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="2"/>
+
         </Grid>
     </Grid>
 </Window>

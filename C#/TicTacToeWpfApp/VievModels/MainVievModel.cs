@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TicTacToeWpfApp.Models;
 using TicTacToeWpfApp.Objects;
@@ -26,7 +28,7 @@ namespace TicTacToeWpfApp.VievModels
             }
         }
 
-        public string[,] Board
+        public string[][] Board
         {
             get { return dataModel.board; }
             set
@@ -65,15 +67,15 @@ namespace TicTacToeWpfApp.VievModels
                     setPleyerCommand = new RelayCommand<object>(
                         o =>
                         {
-                            Tuple<int, int> position = (Tuple<int, int>)o;
-                            int row = position.Item1;
+                            //Tuple<int, int> position = (Tuple<int, int>)o;
+                            int row = Grid.GetRow(o);
                             int col = position.Item2;
-
+                            
                             // check move is corect
                             if (CanExecute(o))
                             {
                                 // Aktualizuj model
-                                dataModel.board[row, col] = dataModel.currentPlayer;
+                                dataModel.board[row][col] = dataModel.currentPlayer;
 
                                 if (CheckForWinner() || CheckForDraw())
                                 {
@@ -99,7 +101,7 @@ namespace TicTacToeWpfApp.VievModels
                 int col = position.Item2;
 
                 //check cell is empty
-                if (dataModel.board[row, col] == "\0")
+                if (dataModel.board[row][col] == "\0")
                 {
                     return true;
                 }
