@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TicTacToeWpfApp.Models;
@@ -28,22 +29,22 @@ namespace TicTacToeWpfApp.VievModels
             }
         }
 
-        public string[][] Board
+        public ObservableCollection<string> BoardCells
         {
-            get { return dataModel.board; }
+            get { return dataModel.boardCells; }
             set
             {
-                dataModel.board = value;
-                OnPropertyChanged(nameof(Board));
+                dataModel.boardCells = value;
+                OnPropertyChanged(nameof(BoardCells));
             }
         }
 
-        //public ObservableCollection<string> BoardCells
+        //public Dictionary<string, string> BoardCells
         //{
-        //    get { return dataModel.boardCells; }
+        //    get { return dataModel.boardDict; }
         //    set
         //    {
-        //        dataModel.boardCells = value;
+        //        dataModel.boardDict = value;
         //        OnPropertyChanged(nameof(BoardCells));
         //    }
         //}
@@ -67,47 +68,78 @@ namespace TicTacToeWpfApp.VievModels
                     setPleyerCommand = new RelayCommand<object>(
                         o =>
                         {
-                            //Tuple<int, int> position = (Tuple<int, int>)o;
-                            int row = Grid.GetRow(o);
-                            int col = position.Item2;
+                            int row = Grid.GetRow((FrameworkElement)o);
+                            int col = Grid.GetColumn((FrameworkElement)o);
+                            //int row = 0;
+                            //int col = 0;
+                            Tuple<int, int> position = new(row,col);
                             
-                            // check move is corect
-                            if (CanExecute(o))
-                            {
-                                // Aktualizuj model
-                                dataModel.board[row][col] = dataModel.currentPlayer;
+                            dataModel.boardCellsDict[position] = dataModel.currentPlayer;
+                            //check move is corect
+                            //if (CanExecuteMove(position))
+                            //{
+                            //    dataModel.boardCellsDict[position] = dataModel.currentPlayer;
 
-                                if (CheckForWinner() || CheckForDraw())
-                                {
-                                   
-                                }
-                                else
-                                {
-                                    // change player
-                                    dataModel.currentPlayer = (dataModel.currentPlayer == "X") ? "O" : "X";
-                                }
-                            }
+                            //    if (CheckForWinner() || CheckForDraw())
+                            //    {
+
+                            //    }
+                            //    else
+                            //    {
+                            //        // change player
+                            //        BoardCells[position.Item1] = dataModel.boardCellsDict[position];
+                            //        dataModel.currentPlayer = (dataModel.currentPlayer == "X") ? "O" : "X";
+                            //    }
+                            //}
+
+                            BoardCells[convertToIndex(position)] = dataModel.boardCellsDict[position];
                         }
                         );
                 return setPleyerCommand;
             }
         }
 
-        private bool CanExecute(object parameter)
+        //private bool CanExecuteMove(Tuple<int, int> position)
+        //{
+        //    check cell is empty
+        //    if (dataModel.boardCellsDict[position] == "\0")
+        //    {
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
+
+        private short convertToIndex(Tuple<int, int> position) // test function
         {
-            if (parameter is Tuple<int, int> position)
+            if (position.Item1 == 0)
             {
-                int row = position.Item1;
-                int col = position.Item2;
-
-                //check cell is empty
-                if (dataModel.board[row][col] == "\0")
-                {
-                    return true;
-                }
+                if (position.Item2 == 0)
+                    return 0;
+                if (position.Item2 == 1)
+                    return 1;
+                if (position.Item2 == 2)
+                    return 2;
             }
-
-            return false;
+            if (position.Item1 == 1)
+            {
+                if (position.Item2 == 0) 
+                    return 3;
+                if (position.Item2 == 1)
+                    return 4;
+                if (position.Item2 == 2)
+                    return 5;
+            }
+            if (position.Item1 == 1)
+            {
+                if (position.Item2 == 0)
+                    return 6;
+                if (position.Item2 == 1)
+                    return 7;
+                if (position.Item2 == 2)
+                    return 8;
+            }
+            return -1;
         }
 
         private bool CheckForWinner()
