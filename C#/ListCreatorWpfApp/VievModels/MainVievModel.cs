@@ -15,6 +15,8 @@ namespace ListCreatorWpfApp.VievModels
     {
         private ShopListDataModel shopListData = new ShopListDataModel();
 
+        //-------------------------
+        // Properties
         public string Name
         {
             get { return shopListData.name; }
@@ -65,6 +67,8 @@ namespace ListCreatorWpfApp.VievModels
             }
         }
 
+        //-------------------------
+        // Functions
         private ICommand addCommand;
         public ICommand AddCommand
         {
@@ -146,6 +150,7 @@ namespace ListCreatorWpfApp.VievModels
             }
         }
 
+        // updateing list visualisation
         void ShowAndUpdateListText()
         {
             ListNameText = "";
@@ -157,6 +162,7 @@ namespace ListCreatorWpfApp.VievModels
             }
         }
 
+        // check if element is on list
         bool IsOnList(string name)
         {
             foreach (var item in shopListData.shopList)

@@ -8,16 +8,9 @@ using TicTacToeWpfApp.Objects;
 
 namespace TicTacToeWpfApp.Models
 {
-    enum GameStatus
-    {
-        Win,
-        Draw,
-        Game
-    }
-
     class TicTacToeDataModel
     {
-        int gameBoardLenght;
+        public int gameNumberOfPisibleMoves;
 
         public string currentPlayer;
 
@@ -32,7 +25,7 @@ namespace TicTacToeWpfApp.Models
         public TicTacToeDataModel()
         {
             currentPlayer = "X";
-            gameBoardLenght = 9;
+            gameNumberOfPisibleMoves = 9;
 
             playerList = new List<string>() { "X", "O" };
             //board = new string[3, 3];

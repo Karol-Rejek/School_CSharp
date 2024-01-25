@@ -71,7 +71,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalQuestionnaireWpfApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ListCreatorWpfApp", "ListCreatorWpfApp\ListCreatorWpfApp.csproj", "{F0535D76-F7CF-4843-9373-B96C271FDB2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeWpfApp", "TicTacToeWpfApp\TicTacToeWpfApp.csproj", "{A6B7FF8A-BE56-4435-AE80-1D9D9B0E3B16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeWpfApp", "TicTacToeWpfApp\TicTacToeWpfApp.csproj", "{A6B7FF8A-BE56-4435-AE80-1D9D9B0E3B16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

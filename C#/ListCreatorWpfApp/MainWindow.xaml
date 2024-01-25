@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ListCreatorWpfApp"
         xmlns:viewModels="clr-namespace:ListCreatorWpfApp.VievModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="600">
     <Window.DataContext>
         <viewModels:MainVievModel/>
     </Window.DataContext>
@@ -38,7 +38,7 @@
             <TextBlock Text="Lista Zakupów" 
                        TextAlignment="Center" Background="Cyan"
                        FontSize="20" FontStyle="Oblique"/>
-            <WrapPanel Background="Bisque" Width="250">
+            <WrapPanel Background="Bisque">
                 <TextBlock Text="Produkt" Margin="10 0"/>
                 <Label Width="130"/>
                 <TextBlock Text="Ilość"/>
