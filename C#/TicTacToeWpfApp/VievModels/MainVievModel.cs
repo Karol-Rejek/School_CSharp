@@ -94,10 +94,8 @@ namespace TicTacToeWpfApp.VievModels
                                 {
                                     dataModel.currentPlayer = (dataModel.currentPlayer == "X") ? "O" : "X";
                                 }
-
                                 
                             }
-                            
                         }
                         );
                 return setPleyerCommand;

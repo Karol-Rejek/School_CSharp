@@ -78,31 +78,39 @@ namespace ListCreatorWpfApp.VievModels
                     addCommand = new RelayCommand<object>(
                         o =>
                         {
-                            if (int.TryParse(Quantity,out int intQuantity))
+                            if (!string.IsNullOrWhiteSpace(Name))
                             {
-                                ListObject newListObject = new ListObject();
-                                newListObject.textData.name = Name;
-
-                                if (IsOnList(Name))
+                                if(string.IsNullOrWhiteSpace(Quantity))
                                 {
-                                    foreach (var item in shopListData.shopList)
+                                    Quantity = "1";
+                                }
+
+                                if (int.TryParse(Quantity, out int intQuantity))
+                                {
+                                    ListObject newListObject = new ListObject();
+                                    newListObject.textData.name = Name;
+
+                                    if (IsOnList(Name))
                                     {
-                                        if (item.textData.name == Name)
+                                        foreach (var item in shopListData.shopList)
                                         {
-                                            item.numericData.quantity += intQuantity;
-                                            CheckText = "Pomyślnie dodane do listy";
-                                            break;
+                                            if (item.textData.name == Name)
+                                            {
+                                                item.numericData.quantity += intQuantity;
+                                                CheckText = "Pomyślnie dodane do listy";
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    newListObject.numericData.quantity = intQuantity;
-                                    shopListData.shopList.Add(newListObject);
-                                    CheckText = "Pomyślnie dodane do listy";
-                                }
+                                    else
+                                    {
+                                        newListObject.numericData.quantity = intQuantity;
+                                        shopListData.shopList.Add(newListObject);
+                                        CheckText = "Pomyślnie dodane do listy";
+                                    }
 
-                                ShowAndUpdateListText();
+                                    ShowAndUpdateListText();
+                                }
                             }
                         }
                         );
@@ -118,29 +126,37 @@ namespace ListCreatorWpfApp.VievModels
                 removeCommand ??= new RelayCommand<object>(
                         o =>
                         {
-                            foreach (var item in shopListData.shopList)
+                            if (!string.IsNullOrWhiteSpace(Name))
                             {
-                                if(item.textData.name == Name)
+                                if (string.IsNullOrWhiteSpace(Quantity))
                                 {
-                                    if (int.TryParse(Quantity, out int intQuantity))
+                                    Quantity = "1";
+                                }
+
+                                foreach (var item in shopListData.shopList)
+                                {
+                                    if (item.textData.name == Name)
                                     {
-                                        if ((item.numericData.quantity - intQuantity) >= 1)
+                                        if (int.TryParse(Quantity, out int intQuantity))
                                         {
-                                            item.numericData.quantity -= intQuantity;
-                                            CheckText = "Pomyślnie usunięto z listy";
-                                            ShowAndUpdateListText();
-                                            break;
-                                        }
+                                            if ((item.numericData.quantity - intQuantity) >= 1)
+                                            {
+                                                item.numericData.quantity -= intQuantity;
+                                                CheckText = "Pomyślnie usunięto z listy";
+                                                ShowAndUpdateListText();
+                                                break;
+                                            }
 
-                                        if(item.numericData.quantity == intQuantity)
-                                        {
-                                            shopListData.shopList.Remove(item);
-                                            CheckText = "Pomyślnie usunięto z listy";
-                                            ShowAndUpdateListText();
-                                            break;
-                                        }
-                                        CheckText = "Błąd z usunięciem z listy\n" + "Sprubój ponownie";
+                                            if (item.numericData.quantity == intQuantity)
+                                            {
+                                                shopListData.shopList.Remove(item);
+                                                CheckText = "Pomyślnie usunięto z listy";
+                                                ShowAndUpdateListText();
+                                                break;
+                                            }
+                                            CheckText = "Błąd z usunięciem z listy\n" + "Sprubój ponownie";
 
+                                        }
                                     }
                                 }
                             }
