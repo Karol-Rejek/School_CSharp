@@ -45,15 +45,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="{Binding BoardCells[0]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="0"/>
-            <Button Content="{Binding BoardCells[1]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="1"/>
-            <Button Content="{Binding BoardCells[2]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="2"/>
-            <Button Content="{Binding BoardCells[3]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="0"/>
-            <Button Content="{Binding BoardCells[4]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="1"/>
-            <Button Content="{Binding BoardCells[5]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="2"/>
-            <Button Content="{Binding BoardCells[6]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="0"/>
-            <Button Content="{Binding BoardCells[7]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="1"/>
-            <Button Content="{Binding BoardCells[8]}" Command="{Binding SetPleyerCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="2"/>
+            <Button Content="{Binding BoardCells[0].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="0" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="0"/>
+            <Button Content="{Binding BoardCells[1].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="1" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="1"/>
+            <Button Content="{Binding BoardCells[2].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="2" Style="{StaticResource GameButtonStyle}" Grid.Column="0" Grid.Row="2"/>
+            <Button Content="{Binding BoardCells[3].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="3" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="0"/>
+            <Button Content="{Binding BoardCells[4].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="4" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="{Binding BoardCells[5].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="5" Style="{StaticResource GameButtonStyle}" Grid.Column="1" Grid.Row="2"/>
+            <Button Content="{Binding BoardCells[6].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="6" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="0"/>
+            <Button Content="{Binding BoardCells[7].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="7" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="1"/>
+            <Button Content="{Binding BoardCells[8].SettedPlayer}" Command="{Binding SetPleyerCommand}" CommandParameter="8" Style="{StaticResource GameButtonStyle}" Grid.Column="2" Grid.Row="2"/>
         </Grid>
     </Grid>
 </Window>

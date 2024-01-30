@@ -30,7 +30,7 @@ namespace TicTacToeWpfApp.VievModels
             }
         }
 
-        public ObservableCollection<string> BoardCells
+        public ObservableCollection<BoardCell> BoardCells
         {
             get { return dataModel.boardCells; }
             set
@@ -40,15 +40,25 @@ namespace TicTacToeWpfApp.VievModels
             }
         }
 
-        //public Dictionary<string, string> BoardCells
-        //{
-        //    get { return dataModel.boardDict; }
-        //    set
-        //    {
-        //        dataModel.boardDict = value;
-        //        OnPropertyChanged(nameof(BoardCells));
-        //    }
-        //}
+        public string ColQuantity
+        {
+            get { return dataModel.colQuantity; }
+            set
+            {
+                dataModel.colQuantity = value;
+                OnPropertyChanged(nameof(ColQuantity));
+            }
+        }
+
+        public string RowQuantity
+        {
+            get { return dataModel.rowQuantity; }
+            set
+            {
+                dataModel.rowQuantity = value;
+                OnPropertyChanged(nameof(RowQuantity));
+            }
+        }
 
         public List<string> PlayerList
         {
@@ -62,39 +72,64 @@ namespace TicTacToeWpfApp.VievModels
 
         //-------------------------
         // Functions
+
+        private ICommand gameStart;
+        public ICommand GameStart
+        {
+            get
+            {
+                if (gameStart == null)
+                    gameStart = new RelayCommand<object>(
+                        o =>
+                        {
+                            if (int.TryParse(ColQuantity, out var col) && int.TryParse(RowQuantity, out var row))
+                            {
+                                dataModel.gameBoardSize.X = col;
+                                dataModel.gameBoardSize.Y = row;
+                                dataModel.bGameRun = true;
+                            }
+                        }
+                        );
+                return gameStart;
+            }
+        }
+
         private ICommand setPleyerCommand;
         public ICommand SetPleyerCommand
         {
             get
             {
-                setPleyerCommand ??= new RelayCommand<object>(
+                setPleyerCommand ??= new RelayCommand<int>(
                         o =>
                         {
-                            int row = Grid.GetRow((FrameworkElement)o);
-                            int col = Grid.GetColumn((FrameworkElement)o);
-                            Tuple<int, int> position = new(col,row);
-                            
-                            //dataModel.boardCellsDict[position] = dataModel.currentPlayer;
-
-                            // check move is corect
-                            if (CanExecuteMove(position))
+                            if (dataModel.bGameRun)
                             {
-                                dataModel.boardCellsDict[position] = dataModel.currentPlayer;
-                                if (convertToIndex(position) != -1)
-                                    BoardCells[convertToIndex(position)] = dataModel.boardCellsDict[position];
-                                dataModel.gameNumberOfPisibleMoves--;
+                                Position position = new() { X = o / dataModel.gameBoardSize.X, Y = o % dataModel.gameBoardSize.Y };
 
-                                string message = string.Empty;
-                                if (CheckForWin(out message) || CheckForDraw(out message))
+                                //dataModel.boardCellsDict[position] = dataModel.currentPlayer;
+
+                                // check move is corect
+                                if (CanExecuteMove(position))
                                 {
-                                    MessageBox.Show("Wynik gry: " + message);
-                                    GameEnd();
+                                    BoardCell boardCell = FindElementOfIndex(BoardCells, position);
+
+                                    if (boardCell != null)
+                                    {
+                                        boardCell.SettedPlayer = CurrentPlayer;
+                                        dataModel.gameNumberOfPisibleMoves--;
+                                    }
+
+                                    string message = string.Empty;
+                                    if (CheckForWin(out message) || CheckForDraw(out message))
+                                    {
+                                        MessageBox.Show("Wynik gry: " + message);
+                                        GameEnd();
+                                    }
+                                    else
+                                    {
+                                        CurrentPlayer = ChangePlayer(CurrentPlayer);
+                                    }
                                 }
-                                else
-                                {
-                                    dataModel.currentPlayer = (dataModel.currentPlayer == "X") ? "O" : "X";
-                                }
-                                
                             }
                         }
                         );
@@ -103,101 +138,77 @@ namespace TicTacToeWpfApp.VievModels
         }
 
         // checking if player can make move
-        private bool CanExecuteMove(Tuple<int, int> position)
+        private bool CanExecuteMove(Position position)
         {
             // check cell is empty
-            if (dataModel.boardCellsDict[position] == "")
-            {
-                return true;
-            }
+            return (FindElementOfIndex(BoardCells, position).SettedPlayer == "") ? true : false;
+        }
 
-            return false;
+        BoardCell FindElementOfIndex(ObservableCollection<BoardCell> collection, Position index)
+        {
+            return collection.FirstOrDefault(bc => bc.Position.X == index.X && bc.Position.Y == index.Y);
+        }
+
+        string ChangePlayer(string player)
+        {
+            return (player == "X") ? "O" : "X";
         }
 
         // ending game and start new
         void GameEnd()
         {
-            foreach (var item in dataModel.boardCellsDict)
-            {
-                dataModel.boardCellsDict[item.Key] = string.Empty;
-                if (convertToIndex(item.Key) != -1)
-                    BoardCells[convertToIndex(item.Key)] = dataModel.boardCellsDict[item.Key];
-            }
-        }
+            dataModel.bGameRun = false;
 
-        private short convertToIndex(Tuple<int, int> position) // test function to rebuild
-        {
-            if (position.Item1 == 0)
+            foreach (var item in BoardCells)
             {
-                if (position.Item2 == 0)
-                    return 0;
-                if (position.Item2 == 1)
-                    return 1;
-                if (position.Item2 == 2)
-                    return 2;
+               item.SettedPlayer = string.Empty;
             }
-            if (position.Item1 == 1)
-            {
-                if (position.Item2 == 0) 
-                    return 3;
-                if (position.Item2 == 1)
-                    return 4;
-                if (position.Item2 == 2)
-                    return 5;
-            }
-            if (position.Item1 == 2)
-            {
-                if (position.Item2 == 0)
-                    return 6;
-                if (position.Item2 == 1)
-                    return 7;
-                if (position.Item2 == 2)
-                    return 8;
-            }
-            return -1;
         }
 
         #region Checking game status functions
         // check if win
         private bool CheckForWin(out string message)
         {
-            for(int col = 0; col < 3; col++)
+            int setPlayers = 0;
+            for (int col = 0; col < dataModel.; col++)
             {
-                if (dataModel.boardCellsDict[new(col,0)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(col,1)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(col,2)] == CurrentPlayer)
+                for(int row = 0; row < 3; row++)
                 {
-                    message = "Wygrał: " + CurrentPlayer;
-                    return true;
+                    if (FindElementOfIndex(BoardCells, new() { X = col, Y = row }).SettedPlayer == CurrentPlayer)
+                    {
+                        setPlayers++;
+                        message = "Wygrał: " + CurrentPlayer;
+                        return true;
+                    }
                 }
             }
 
-            for (int row = 0; row < 3; row++)
-            {
-                if (dataModel.boardCellsDict[new(0, row)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(1, row)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(2, row)] == CurrentPlayer)
-                {
-                    message = "Wygrał: " + CurrentPlayer;
-                    return true;
-                }
-            }
+            //for (int row = 0; row < 3; row++)
+            //{
+            //    if (dataModel.boardCellsDict[new(0, row)] == CurrentPlayer &&
+            //        dataModel.boardCellsDict[new(1, row)] == CurrentPlayer &&
+            //        dataModel.boardCellsDict[new(2, row)] == CurrentPlayer)
+            //    {
+            //        message = "Wygrał: " + CurrentPlayer;
+            //        return true;
+            //    }
+            //}
 
-            if (dataModel.boardCellsDict[new(0, 0)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(1, 1)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(2, 2)] == CurrentPlayer)
-            {
-                message = "Wygrał: " + CurrentPlayer;
-                return true;
-            }
+            //if (dataModel.boardCellsDict[new(0, 0)] == CurrentPlayer &&
+            //        dataModel.boardCellsDict[new(1, 1)] == CurrentPlayer &&
+            //        dataModel.boardCellsDict[new(2, 2)] == CurrentPlayer)
+            //{
+            //    message = "Wygrał: " + CurrentPlayer;
+            //    return true;
+            //}
 
-            if (dataModel.boardCellsDict[new(2, 0)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(1, 1)] == CurrentPlayer &&
-                    dataModel.boardCellsDict[new(0, 2)] == CurrentPlayer)
-            {
-                message = "Wygrał: " + CurrentPlayer;
-                return true;
-            }
+            //if (dataModel.boardCellsDict[new(2, 0)] == CurrentPlayer &&
+            //        dataModel.boardCellsDict[new(1, 1)] == CurrentPlayer &&
+            //        dataModel.boardCellsDict[new(0, 2)] == CurrentPlayer)
+            //{
+            //    message = "Wygrał: " + CurrentPlayer;
+            //    return true;
+            //}
 
             message = string.Empty;
             return false;
@@ -211,7 +222,7 @@ namespace TicTacToeWpfApp.VievModels
             {
                 for (int row = 0; col < 3; col++)
                 {
-                    if (dataModel.boardCellsDict[new(col, row)] == "" )
+                    if (FindElementOfIndex(BoardCells, new Position() { X = col, Y = row }).SettedPlayer == "" )
                     {
                         isDraw = false;
                     }

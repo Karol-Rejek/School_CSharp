@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace TicTacToeWpfApp.Objects
 {
-
     class BoardCell
     {
-        public Position position = new();
+        public Position Position { get; set; } = new();
 
-        public string settedPlayer;
+        public string SettedPlayer { get; set; }
     }
 }

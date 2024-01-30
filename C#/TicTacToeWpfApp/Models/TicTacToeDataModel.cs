@@ -10,60 +10,51 @@ namespace TicTacToeWpfApp.Models
 {
     class TicTacToeDataModel
     {
+        public Position gameBoardSize;
         public int gameNumberOfPisibleMoves;
+        public bool bGameRun;
 
         public string currentPlayer;
+        public string colQuantity;
+        public string rowQuantity;
 
         //public ObservableCollection<BoardCell> boardCellCollection;
-        public ObservableCollection<string> boardCells;
+        public ObservableCollection<BoardCell> boardCells;
         
         public List<string> playerList;
-        //public ObservableCollection<string> boardCells;
+        //public ObservableCollection<BoardCell> boardCells;
         //public string[,] board;
         //public Dictionary<string, string> boardDict;
-        public Dictionary<Tuple<int,int>,string> boardCellsDict;
+        //public Dictionary<Tuple<int,int>,string> boardCellsDict;
         public TicTacToeDataModel()
         {
             currentPlayer = "X";
             gameNumberOfPisibleMoves = 9;
+            bGameRun = true;
+            gameBoardSize = new();
 
             playerList = new List<string>() { "X", "O" };
-            //board = new string[3, 3];
-            
+
             //boardCells = new();
 
-            //boardCellCollection = new ObservableCollection<BoardCell>();
-            boardCellsDict = new()
+            boardCells = new()
             {
-                { new Tuple<int, int>(0, 0), string.Empty },
-                { new Tuple<int, int>(0, 1), string.Empty },
-                { new Tuple<int, int>(0, 2), string.Empty },
-                { new Tuple<int, int>(1, 0), string.Empty },
-                { new Tuple<int, int>(1, 1), string.Empty },
-                { new Tuple<int, int>(1, 2), string.Empty },
-                { new Tuple<int, int>(2, 0), string.Empty },
-                { new Tuple<int, int>(2, 1), string.Empty },
-                { new Tuple<int, int>(2, 2), string.Empty }
+                new() { Position = new Position() { X = 0, Y = 2 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 0, Y = 1 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 0, Y = 0 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 1, Y = 2 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 1, Y = 1 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 1, Y = 0 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 2, Y = 2 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 2, Y = 1 }, SettedPlayer = string.Empty },
+                new() { Position = new Position() { X = 2, Y = 0 }, SettedPlayer = string.Empty }
             };
 
-            //boardCellCollection = new()
+            //boardCells = new();
+            //foreach (var cell in boardCellsDict)
             //{
-            //    new() { position = new Position() { x = 0, y = 2 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 0, y = 1 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 0, y = 0 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 1, y = 2 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 1, y = 1 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 1, y = 0 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 2, y = 2 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 2, y = 1 }, settedPlayer = string.Empty },
-            //    new() { position = new Position() { x = 2, y = 0 }, settedPlayer = string.Empty }
-            //};
-
-            boardCells = new();
-            foreach (var cell in boardCellsDict)
-            {
-                boardCells.Add(cell.Value);
-            }
+            //    boardCells.Add(cell.Value);
+            //}
             //boardDict = new();
             //foreach (var cell in boardCellsDict)
             //{

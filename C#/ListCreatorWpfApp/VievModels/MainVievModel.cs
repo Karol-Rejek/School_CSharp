@@ -112,6 +112,7 @@ namespace ListCreatorWpfApp.VievModels
                                     ShowAndUpdateListText();
                                 }
                             }
+                            CheckText = "Nie wprowadzono produktu!";
                         }
                         );
                 return addCommand;
@@ -160,6 +161,7 @@ namespace ListCreatorWpfApp.VievModels
                                     }
                                 }
                             }
+                            CheckText = "Nie wprowadzono produktu!";
                         }
                         );
                 return removeCommand;
