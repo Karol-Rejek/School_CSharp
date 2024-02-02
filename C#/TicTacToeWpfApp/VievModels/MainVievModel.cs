@@ -170,16 +170,25 @@ namespace TicTacToeWpfApp.VievModels
         private bool CheckForWin(out string message)
         {
             int setPlayers = 0;
-            for (int col = 0; col < dataModel.; col++)
+            for (int col = 0; col < dataModel.gameBoardSize.X; col++)
             {
-                for(int row = 0; row < 3; row++)
+                for(int row = 0; row < dataModel.gameBoardSize.Y; row++)
                 {
                     if (FindElementOfIndex(BoardCells, new() { X = col, Y = row }).SettedPlayer == CurrentPlayer)
                     {
                         setPlayers++;
-                        message = "Wygrał: " + CurrentPlayer;
-                        return true;
+                        if(setPlayers == dataModel.gameBoardSize.Y)
+                        {
+                            setPlayers = 0;
+                            message = "Wygrał: " + CurrentPlayer;
+                            return true;
+                        }
+                        
                     }
+                }
+                if(setPlayers != 0)
+                {
+                    setPlayers = 0;
                 }
             }
 
