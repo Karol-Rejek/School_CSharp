@@ -47,6 +47,6 @@
                 </GroupBox>
             </StackPanel>
         </Grid>
-        <Button Content="Zatwierdź" VerticalAlignment="Bottom" Margin="10" />
+        <Button Content="Zatwierdź" Command="{Binding ConfirmCommand}" VerticalAlignment="Bottom" Margin="10" />
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using Inf04_01WpfApp.Model;
+﻿using Inf04_01WpfApp.Classes.Validators;
+using Inf04_01WpfApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,17 +122,15 @@ namespace Inf04_01WpfApp.Viewmodel
             }
         }
 
-
         private ICommand confirmCommand;
         public ICommand ConfirmCommand
         {
             get
             {
-                if (confirmCommand == null)
-                    confirmCommand = new RelayCommand<object>(
+                confirmCommand ??= new RelayCommand<object>(
                         o =>
                         {
-                            if (Validate(PostCodeStr, out string message))
+                            if (!new Validate().Validation(PostCodeStr, out string message))
                             {
                                 MessageBox.Show(message);
                             }
@@ -145,41 +144,6 @@ namespace Inf04_01WpfApp.Viewmodel
             }
         }
 
-        bool Validate(string x, out string message)
-        {
-            string m = string.Empty;
-            if(string.IsNullOrEmpty(x) || ValidateLenght(x,out m) || ValidateChar(x, out m))
-            {
-                message = m;
-                return false;
-            }
-            message = string.Empty;
-            return true;
-        }
-
-        bool ValidateLenght(string x, out string message)
-        {
-            if(x.Length != 4)
-            {
-                message = "Nieprawidłowa liczba cyfr w kodzie pocztowym";
-                return true;
-            }
-            message = string.Empty;
-            return false;
-        }
-
-        bool ValidateChar(string x, out string message)
-        {
-            for (int i = 0; i < x.Length; i++)
-            {
-                if (x[i] <= '0' || x[i] >= '9')
-                {
-                    message = "Kod pocztowy powinien składać się z samych cyfr";
-                    return true;
-                }
-            }
-            message = string.Empty;
-            return false;
-        }
+        
     }
 }
