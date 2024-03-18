@@ -63,33 +63,33 @@ namespace Inf04_01WpfApp.Viewmodel
             }
         }
 
-        public bool Package
+        public bool IsPackageSelect
         {
             get { return dataModel.bPackage; }
             set
             {
                 dataModel.bPackage = value;
-                OnPropertyChanged(nameof(Package));
+                OnPropertyChanged(nameof(IsPackageSelect));
             }
         }
 
-        public bool Letter
+        public bool IsLetterSelect
         {
             get { return dataModel.bLetter; }
             set
             {
                 dataModel.bLetter = value;
-                OnPropertyChanged(nameof(Letter));
+                OnPropertyChanged(nameof(IsLetterSelect));
             }
         }
 
-        public bool Postcard
+        public bool IsPostcardSelect
         {
             get { return dataModel.bPostcard; }
             set
             {
                 dataModel.bPostcard = value;
-                OnPropertyChanged(nameof(Postcard));
+                OnPropertyChanged(nameof(IsPostcardSelect));
             }
         }
 
@@ -101,17 +101,17 @@ namespace Inf04_01WpfApp.Viewmodel
                 checkPriceCommand ??= new RelayCommand<object>(
                         o =>
                         {
-                            if(Postcard)
+                            if(IsPostcardSelect)
                             {
                                 ImageSource = "/pliki/pocztowka.png";
                                 ShowText = "Cena: 1zł"; 
                             }
-                            if (Letter)
+                            if (IsLetterSelect)
                             {
                                 ImageSource = "/pliki/list.png";
                                 ShowText = "Cena: 1,5zł";
                             }
-                            if (Package)
+                            if (IsPackageSelect)
                             {
                                 ImageSource = "/pliki/paczka.png";
                                 ShowText = "Cena: 10zł";
@@ -143,7 +143,5 @@ namespace Inf04_01WpfApp.Viewmodel
                 return confirmCommand;
             }
         }
-
-        
     }
 }

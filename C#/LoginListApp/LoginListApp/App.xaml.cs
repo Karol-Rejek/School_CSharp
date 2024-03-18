@@ -1,8 +1,9 @@
-﻿using System;
+﻿using LoginListApp.Pages;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace FirstApp
+namespace LoginListApp
 {
     public partial class App : Application
     {
@@ -10,7 +11,7 @@ namespace FirstApp
         {
             InitializeComponent();
 
-            //MainPage = new MainPage();
+            MainPage = new ListPage();
         }
 
         protected override void OnStart()

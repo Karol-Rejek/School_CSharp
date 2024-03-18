@@ -23,9 +23,9 @@
             <StackPanel Grid.Column="0">
                 <GroupBox BorderThickness="2">
                     <StackPanel>
-                        <RadioButton Content="Pocztówka" IsChecked="{Binding Postcard}" GroupName="Rodzaj przesyłek"/>
-                        <RadioButton Content="Lista" IsChecked="{Binding Letter}" GroupName="Rodzaj przesyłek"/>
-                        <RadioButton Content="Paczka" IsChecked="{Binding Package}" GroupName="Rodzaj przesyłek"/>
+                        <RadioButton Content="Pocztówka" IsChecked="{Binding IsPackageSelect}" GroupName="Rodzaj przesyłek"/>
+                        <RadioButton Content="Lista" IsChecked="{Binding IsLetterSelect}" GroupName="Rodzaj przesyłek"/>
+                        <RadioButton Content="Paczka" IsChecked="{Binding IsPostcardSelect}" GroupName="Rodzaj przesyłek"/>
                     </StackPanel>
                 </GroupBox>
                 <Button Content="Sprawdź cenę" HorizontalAlignment="Center" Command="{Binding CheckPriceCommand}"/>

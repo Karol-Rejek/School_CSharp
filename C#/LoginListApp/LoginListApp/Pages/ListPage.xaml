@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LoginListApp.Pages.ListPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Nowa wiadomość"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry/>
+
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Dodaj" Clicked="Button_Clicked_AddToList" 
+                        Grid.Column="0"/>
+                <Button Text="Usuń" Clicked="Button_Clicked_DeleteFromList" 
+                        Grid.Column="1"/>
+                <Button Text="Powrót" Clicked="Button_Clicked_Back" 
+                        Grid.Column="2"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
