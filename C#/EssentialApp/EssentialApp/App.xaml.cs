@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace NavigationApp
+namespace EssentialApp
 {
     public partial class App : Application
     {
@@ -10,8 +10,7 @@ namespace NavigationApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
-            //MainPage = new MyNavigationPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

@@ -17,10 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="MyNavigationPage.xaml">
+    <EmbeddedResource Update="FlashLightPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SecondPage.xaml">
+    <EmbeddedResource Update="SMSPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="URLPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EssentialApp.SMSPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Odbiorca:"/>
+            <Entry Text="{Binding Recipient}"/>
+            <Label Text="Treść wiadomości:"/>
+            <Entry Text="{Binding MessageContent}"/>
+            <Button Text="Wyślij"
+                    Clicked="SendSMS_Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
